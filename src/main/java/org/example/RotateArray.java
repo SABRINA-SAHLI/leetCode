@@ -31,35 +31,75 @@ public class RotateArray {
     /*  Time complexity  : O(n+k)
         Space complexity : k
      */
-    public static int[] rotate2(int[]arr, int k){
 
+    public static int[]  rotate2(int[] nums, int k) {
         int[]arrTemp = new int[k];
-        int n = arr.length;
+        int n = nums.length;
         int index=0;
-        for(int i = n -k ; i < n; i++){
-            arrTemp[index] = arr[i];
+        k = k % n;
+
+        if(n == 1)
+            return nums;
+
+        for(int i = n- k ; i < n; i++){
+            arrTemp[index] = nums[i];
             index ++;
         }
 
         for( int i = n-k-1; i>=0 ;i--){
-            arr[i+k] = arr[i];
+            nums[i+k] = nums[i];
         }
 
         for(int i = 0 ; i < k; i++){
-            arr[i] = arrTemp[i];
+            nums[i] = arrTemp[i];
         }
-        return arr;
+       return nums;
+    }
+
+
+    private static void reverse(int[]arr, int i, int j){
+
+        int leftIndex = i;
+        int rightIndex = j;
+        int temp;
+        while(leftIndex < rightIndex){
+
+            temp = arr[leftIndex] ;
+            arr[leftIndex]= arr[rightIndex];
+            arr[rightIndex] = temp;
+            leftIndex++;
+            rightIndex--;
+        }
+
+
+    }
+
+    public static int[] rotate3(int[]nums, int k){
+
+        k = k % nums.length;
+        int n = nums.length;
+
+        reverse(nums,0, n-k-1);
+        reverse(nums, n-k, nums.length-1);
+        reverse(nums,0, nums.length-1);
+        return nums;
     }
 
 
     public static void main(String[]args) {
 
 
-        int[] arr5 = {3, -2, 1, 4, 6, 9, 8};
-        int[] result = rotate(arr5, 3);
+        int[] arr = {3, -2, 1, 4, 6, 9, 8};
+        int[] result = rotate(arr, 3);
         System.out.println("First approach "+Arrays.toString( result));
 
-        int[] result2 = rotate2(arr5, 3);
+
+        int[] arr2 = {3, -2, 1, 4, 6, 9, 8};
+        int[] result2 =rotate2(arr2, 3);
         System.out.println("Second approach " +Arrays.toString(result2));
+
+        int[] arr3 = {3, -2, 1, 4, 6, 9, 8};
+        int[] result3 =rotate3(arr3, 3);
+        System.out.println("Optimized Approach " +Arrays.toString(result3));
     }
 }
