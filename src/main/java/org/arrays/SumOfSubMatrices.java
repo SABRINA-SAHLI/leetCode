@@ -21,10 +21,10 @@ public class SumOfSubMatrices {
 
         int[][]mat = {{1, 1}, {1, 1}};
         int count = sumOfSubmatrices(mat);
-        System.out.println("count: "+count);
+        System.out.println("Sum: "+count);
 
        int[][] mat2 = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
         int count2 = sumOfSubmatrices(mat2);
-        System.out.println("Nb Submatrices in mat2 is: "+count2);
+        System.out.println("Sum of all Submatrices in mat2 is: "+count2);
     }
 }
